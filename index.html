@@ -72,11 +72,12 @@
                         let outcome = playRound (playerChoice, computerPlay());
                         if( outcome === "pointComputer"){
                             computerPoints++;
-                        }
+                            cRounds++;
+                        } else
                         if( outcome === "pointPlayer"){
                             playerPoints++;
+                            cRounds++;
                         }
-                        cRounds++;
                         console.log("Round " + cRounds + " of " + maxRounds + " results:");
                         console.log("Computer: " + computerPoints + " | Player: " + playerPoints)
                     } else {
