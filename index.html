@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Sandbox</title>
+        <meta charset="UTF-8">
+    </head>
+    <header>TOP project TicTacToe. Start by typing game() in dev tools' console</header>
+
+    <body>
+        <script>
+            let maxRounds = 5
+            const choices = ["rock","paper","scissors"]
+            function playRound(playerChoice, computerChoice){
+                let pointComputer = "pointComputer"
+                let pointPlayer = "pointPlayer"
+                let tie = "tie"
+                if(playerChoice === computerChoice){
+                    console.log("Tie! You chose: " + playerChoice + " and computer chose: " + computerChoice);
+                    return tie;
+                }
+                if(playerChoice === "rock" && computerChoice === "paper"){
+                    losePrompt(playerChoice, computerChoice);
+                    return pointComputer;
+                }
+                if(playerChoice === "paper" && computerChoice === "rock"){
+                    winPrompt(playerChoice, computerChoice)
+                    return pointPlayer;
+                }
+                if(playerChoice === "rock" && computerChoice === "scissors"){
+                    winPrompt(playerChoice, computerChoice)
+                    return pointPlayer;
+                }
+                if(playerChoice === "scissors" && computerChoice === "rock"){
+                    losePrompt(playerChoice, computerChoice);
+                    return pointComputer;
+                }
+                if(playerChoice === "paper" && computerChoice === "scissors"){
+                    losePrompt(playerChoice, computerChoice);
+                    return pointComputer;
+                }
+                if(playerChoice === "scissors" && computerChoice === "paper"){
+                    winPrompt(playerChoice, computerChoice)
+                    return pointPlayer;
+                }
+            }
+
+            function losePrompt(playerChoice, computerChoice){
+                console.log("You Lose! " + computerChoice +" beats " + playerChoice);
+            }
+
+            function winPrompt(playerChoice, computerChoice){
+                console.log("You Win! " + playerChoice +" beats " + computerChoice);
+            }
+
+            function randomIntFromInterval(min,max)
+            {
+                return Math.floor(Math.random()*(max-min+1)+min);
+            }
+
+            function computerPlay(){
+                return choices[randomIntFromInterval(0,2)];
+            }
+
+            function game(){
+                let playerPoints = 0;
+                let computerPoints = 0;
+                let cRounds = 0;
+                while (cRounds < maxRounds){
+                    let playerChoice = prompt("Your choice? Hint: choose Rock, Paper or Scissors.")
+                    playerChoice = playerChoice.toLowerCase().trim()
+                    if(choices.includes(playerChoice)){
+                        let outcome = playRound (playerChoice, computerPlay());
+                        if( outcome === "pointComputer"){
+                            computerPoints++;
+                        }
+                        if( outcome === "pointPlayer"){
+                            playerPoints++;
+                        }
+                        cRounds++;
+                        console.log("Round " + cRounds + " of " + maxRounds + " results:");
+                        console.log("Computer: " + computerPoints + " | Player: " + playerPoints)
+                    } else {
+                        window.alert("type in words: rock, paper or scissors")
+                    }
+                }
+                if(playerPoints === computerPoints){
+                    window.alert("Tie!");
+                    console.log("Tie!");
+                } else if (playerPoints > computerPoints){
+                    window.alert("Player wins!");
+                    console.log("Player wins!");
+                } else {
+                    window.alert("Computer wins!");
+                    console.log("Computer wins!");
+                }
+            }
+            
+        </script>
+    </body>
+</html>
