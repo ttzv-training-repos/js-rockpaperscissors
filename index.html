@@ -3,99 +3,47 @@
     <head>
         <title>Sandbox</title>
         <meta charset="UTF-8">
+        <link rel="stylesheet" href="style.css">
+        
     </head>
-    <header>TOP project RockPaperScissors. Start by typing game() in dev tools' console</header>
 
     <body>
-        <script>
-            let maxRounds = 5
-            const choices = ["rock","paper","scissors"]
-            function playRound(playerChoice, computerChoice){
-                let pointComputer = "pointComputer"
-                let pointPlayer = "pointPlayer"
-                let tie = "tie"
-                if(playerChoice === computerChoice){
-                    console.log("Tie! You chose: " + playerChoice + " and computer chose: " + computerChoice);
-                    return tie;
-                }
-                if(playerChoice === "rock" && computerChoice === "paper"){
-                    losePrompt(playerChoice, computerChoice);
-                    return pointComputer;
-                }
-                if(playerChoice === "paper" && computerChoice === "rock"){
-                    winPrompt(playerChoice, computerChoice)
-                    return pointPlayer;
-                }
-                if(playerChoice === "rock" && computerChoice === "scissors"){
-                    winPrompt(playerChoice, computerChoice)
-                    return pointPlayer;
-                }
-                if(playerChoice === "scissors" && computerChoice === "rock"){
-                    losePrompt(playerChoice, computerChoice);
-                    return pointComputer;
-                }
-                if(playerChoice === "paper" && computerChoice === "scissors"){
-                    losePrompt(playerChoice, computerChoice);
-                    return pointComputer;
-                }
-                if(playerChoice === "scissors" && computerChoice === "paper"){
-                    winPrompt(playerChoice, computerChoice)
-                    return pointPlayer;
-                }
-            }
 
-            function losePrompt(playerChoice, computerChoice){
-                console.log("You Lose! " + computerChoice +" beats " + playerChoice);
-            }
+        <h1>Rock, Paper, Scissors</h1>
 
-            function winPrompt(playerChoice, computerChoice){
-                console.log("You Win! " + playerChoice +" beats " + computerChoice);
-            }
+        <div class="init-form">
+            <label>Rounds: </label>
+            <label for="rounds"></label>
+            <input id="roundsLabel" type="range" min="3" max="10" value="3">
+            <div class="button start" data-gameid="start">Start</div>
+        </div>
 
-            function randomIntFromInterval(min,max)
-            {
-                return Math.floor(Math.random()*(max-min+1)+min);
-            }
+        <div id='round-result'>-</div>
+        
+        <div class="choices">
+            <div class="player">
+                <span>Player Choice: </span>
+                <span class="player-choice"></span>
+            </div>
+            <div class="computer">
+                <span>Computer Choice: </span>
+                <span class="computer-choice"></span>
+            </div>
+        </div>
 
-            function computerPlay(){
-                return choices[randomIntFromInterval(0,2)];
-            }
+        <div class="game-buttons">
+            <div class="button rock" data-gameid="rock"></div>
+            <div class="button paper" data-gameid="paper"></div>
+            <div class="button scissors" data-gameid="scissors"></div>
+        </div>
 
-            function game(){
-                let playerPoints = 0;
-                let computerPoints = 0;
-                let cRounds = 0;
-                while (cRounds < maxRounds){
-                    let playerChoice = prompt("Your choice? Hint: choose Rock, Paper or Scissors.")
-                    playerChoice = playerChoice.toLowerCase().trim()
-                    if(choices.includes(playerChoice)){
-                        let outcome = playRound (playerChoice, computerPlay());
-                        if( outcome === "pointComputer"){
-                            computerPoints++;
-                            cRounds++;
-                        } else
-                        if( outcome === "pointPlayer"){
-                            playerPoints++;
-                            cRounds++;
-                        }
-                        console.log("Round " + cRounds + " of " + maxRounds + " results:");
-                        console.log("Computer: " + computerPoints + " | Player: " + playerPoints)
-                    } else {
-                        window.alert("type in words: rock, paper or scissors")
-                    }
-                }
-                if(playerPoints === computerPoints){
-                    window.alert("Tie!");
-                    console.log("Tie!");
-                } else if (playerPoints > computerPoints){
-                    window.alert("Player wins!");
-                    console.log("Player wins!");
-                } else {
-                    window.alert("Computer wins!");
-                    console.log("Computer wins!");
-                }
-            }
-            
-        </script>
+        <div class="scores">
+            <ul>
+                <li id="rounds">Round: </li>
+                <li id="playerScore"> Player Score: </li>
+                <li id="computerScore"> Computer Score: </li>
+            </ul>
+        </div>
+        <script src="script.js"></script>
     </body>
 </html>
